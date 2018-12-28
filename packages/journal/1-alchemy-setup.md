@@ -21,7 +21,84 @@ According to the installation docs, installation should be as easy as:
 - Run `make depend`
 - Run `make`
 
-And this should work... let's try it now
+And this should work... let's try it now. From their `src/makefile`, it seems alchemy has the following dependencies:
+
+```makefile
+GPP=g++
+FLEX=flex
+BISON=bison
+```
+
+It seems I have all these dependencies locally on my mac already (yay):
+
+```zsh
+$ which g++
+/usr/bin/g++
+$ which flex
+/usr/bin/flex
+$ which bison
+/usr/bin/bison
+```
+
+Running `make depend` appears to be successful. Against my expectations (of someone coming from a enterprise development world), the `make depend` command modifies in-place the `src/makefile` and "enables" the `make` command.
+
+For reference, the `make depend` looks like:
+
+```makefile
+depend:
+  @echo 'updating the dependencies for:'
+  @echo '    ' $(CPPFILES)
+  @( \
+  < $(MF) sed -n '1,/^###.*SUDDEN DEATH/p'; \
+      echo '#' ; \
+      echo '# dependencies generated on: ' `date` ; \
+      echo '#' ; \
+      for i in $(CPPFILES); do \
+          echo -n "$(OBJDIR)/" ; \
+          $(GPP) -MM $(CFLAGS) $$i ; \
+          echo; \
+      done \
+  ) > $(MF).new
+  @mv $(MF) $(MF).last
+  @mv $(MF).new $(MF)
+```
+
+But, upon using the newly generated `make` command, I get the following error:
+
+```zsh
+➜  src git:(master) ✗ make
+makefile:402: *** missing separator.  Stop.
+```
+
+The error apparently is the result of improper tab v. space usage as per [this stackoverflow question][10]. This is ultimately because the `echo` program on the mac refuses to properly accept the `-n` flag, instead it merely echoes it. Slightly rewriting their `depend` instruction's for loop to the following fixes it:
+
+```bash
+for i in $(CPPFILES); do \
+  KILL_ME=`$(GPP) -MM $$CFLAGS $$i`; \
+  echo "$(OBJDIR)/" $$KILL_ME; \
+  echo; \
+done \
+```
+
+Running it, however, it seems we now have some issues regarding dependency issues. Notably, any header file (e.g. `array.h`) that doesn't have matching `cpp` file seems to crash. I'm not sure what causes this
+
+As it turns out, it was because `$$CFLAGS` evaluated to null and thus all my `#include`s were missing; this is fixed by changing to:
+
+```makefile
+debug:
+	for i in $(CPPFILES); do \
+		KILL_ME=`$(GPP) -MM ${CFLAGS} $$i`; \
+		echo "$(OBJDIR)/$$KILL_ME"; \
+		echo; \
+	done
+```
+
+>note: Can I just say, either make and shell is hard, or I'm literally retarded 😭
+
+Anyway, after all this, I'm *finally* able to `make depend`
+
+However, upon running `make` when the configured makefile, everything breaks due to c++ type checks (pls kill me)
+
 
 # Appendix
 
@@ -38,6 +115,114 @@ So a natural question to ask is that, today, in late 2018 (December 27), are MLN
 
 Of course, not knowing what I don't know, I can't make a "good" judgement on this issue at this time. Therefore, given how little I know of this subject, any start as good as another, so I'm just going to dive head-first into this. If I turn out to be mistaken, I could always jump onto more main-stream techniques like [tensorflow][3] some time later
 
+## A2 - On Programming Language Tools
+
+Alchemy (as well as tons of other "comp-sci" projects) seem to depend a lot on linux tools such as:
+
+- [flex][8]
+  - A lexer on linux systems
+- [bison][9]
+  - A parser generator
+
+As someone who entered into development through web-programming instead of computer science, I obviously don't have the background to properly know how to use these tools. I should endeavor to fix this and brush up on my knowledge of programming languages and the like
+
+## A3 - A Quick and Dirty Guide to Makefiles
+
+Q: What's the deal with spaces and tabs in makefiles?
+
+A: `make`, the ancestor of more sensible compilation systems like `npm`, `rake`, `mix`, `cargo`, or `go`, is a bit of hassel to work with. Here are some eccentricities:
+
+As per [this stack article][10], `Makefile`s require `\t` tabs in order to work properly, this means modifying my `.editorconfig` to also include the following
+
+```text
+[{Makefile,makefile,makefile.*,**.mk}]
+indent_style = tab
+```
+
+>Note: read about [editorconfig here][11]
+
+Q: What is the `@` stuff I see in front of certain commands like:
+```makefile
+depend:
+  @echo "something"
+```
+and what's the difference versus if I don't put in the `@` in front of the `echo` command?
+
+A: Apparently the `@` suppresses printing of the command text it self; consider the examples:
+
+```sh
+➜  alchemy-2 git:(master) ✗ make depend
+Death 2 makefiles
+➜  alchemy-2 git:(master) ✗ make depend
+echo "Death 2 makefiles"
+Death 2 makefiles
+```
+
+When I put in the `@echo`, we suppress printing our echo instructions
+
+## A4 - A Quick and Dirty Overview of g++ and sh
+
+C, C++, and their ilk are all (typically) compiled with `g++` on unix systems, and alchemy project is no different. One thing to note from their make file is this line:
+
+```Makefile
+depend:
+  # other stuff
+  $(GPP) -MM $(CFLAGS) $$i ; \`
+```
+
+According to the [gcc preprocessor docs][12], it seems the `-MM` flag generates dependency lists for make files (but exclude system level dependencies)
+
+Another thing to note is the following inputs and outputs:
+
+```makefile
+debug1:
+	KILL_ME="Oh god"; \
+	echo $KILL_ME; \
+	echo "$KILL_ME"; \
+	echo ${KILL_ME}; \
+	echo $$KILL_ME; \
+	echo `KILL_ME`; \
+```
+
+```zsh
+➜  src git:(master) ✗ make debug1
+KILL_ME="Oh god"; \
+	echo ILL_ME; \
+	echo "ILL_ME"; \
+	echo ; \
+	echo $KILL_ME; \
+	echo `KILL_ME`; \
+
+ILL_ME
+ILL_ME
+
+Oh god
+/bin/sh: KILL_ME: command not found
+```
+
+We have the following correspondence
+- ```echo $KILL_ME; \``` => ```ILL_ME```
+- ```echo "$KILL_ME"; \``` => ```ILL_ME```
+- ```echo ${KILL_ME}; \``` => ``` # empty space ```
+- ```echo $$KILL_ME; \``` => ```Oh god```
+- ```echo `KILL_ME`; \``` => ```/bin/sh: KILL_ME: command not found```
+
+I note the following:
+
+- `$` is some sort of `quote` operator
+- When coupled with a letter or number (e.g. `$1`) it refers to something
+- We need to "double up" on the `$` in order to get them to properly refer to the variable we have in mind; this is a natural consequence when we have data being a part our program... but this is a defining characteristic of a high-level LISP-like language
+
+Finally, for reference, what finally got this to stuff output what I wanted was the following:
+
+```makefile
+debug:
+	for i in $(CPPFILES); do \
+		KILL_ME=`$(GPP) -MM $$CFLAGS $$i`; \
+		echo "$(OBJDIR)/"; \
+		echo $$KILL_ME; \
+	done
+```
 
 # References
 
@@ -50,3 +235,8 @@ As usual, see the raw souce version of this page to view the entire bibliography
 [5]: <https://www.barnesandnoble.com/w/markov-logic-pedro-domingos/1017509868?ean=9781598296921&st=PLA&sid=BNB_New+Core+Shopping+Books&sourceId=PLAGoNA&dpid=tdtve346c&2sid=Google_c&gclid=Cj0KCQiAjZLhBRCAARIsAFHWpbEOJyMAwDIVsm3ogNTzvY2PlaWdm7m5PAlSeuIJ9KZEUKZcCYxTsUEaAlVsEALw_wcB> "Barnes & Noble Product Page for Markov Logic: An Interface Layer for AI"
 [6]: <https://homes.cs.washington.edu/~pedrod/803/> "Course Page for the Markov Logic class from 2008"
 [7]: <http://alchemy.cs.washington.edu/tutorial/tutorial.pdf> "Alchemy Tutorial from Lecture 6 of Domingos's 2008 class"
+[8]: <https://www.gnu.org/software/flex/> "Flex - a Lexer for Linux"
+[9]: <https://www.gnu.org/software/bison/> "Bison - a Parser Generator for Linux"
+[10]: <https://stackoverflow.com/questions/16931770/makefile4-missing-separator-stop> "Stackoverflow - Makefile Missing Separator Stop"
+[11]: <https://editorconfig.org/> "EditorConfig"
+[12]: <https://gcc.gnu.org/onlinedocs/gcc/Preprocessor-Options.html> "g++ preprocess options"

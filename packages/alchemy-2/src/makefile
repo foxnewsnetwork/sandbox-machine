@@ -3,10 +3,10 @@ INLINE_LIMIT=-finline-limit=100000
 STATIC=-static
 
 ######### Profile
-#CLFLAGS=-pg -g $(STATIC) -DNDEBUG $(INLINE_WARN) $(INLINE_LIMIT) 
+#CLFLAGS=-pg -g $(STATIC) -DNDEBUG $(INLINE_WARN) $(INLINE_LIMIT)
 
 ######### Profile & optimize
-#CLFLAGS=-pg -g -O3 $(STATIC) -DNDEBUG $(INLINE_WARN) $(INLINE_LIMIT) 
+#CLFLAGS=-pg -g -O3 $(STATIC) -DNDEBUG $(INLINE_WARN) $(INLINE_LIMIT)
 
 ######## Optimize
 #CLFLAGS=-O3 $(STATIC) $(INLINE_WARN) $(INLINE_LIMIT)
@@ -64,7 +64,7 @@ LFLAGS=$(CLFLAGS) -Wno-deprecated -Wall $(LIBLINC)
 
 
 #############################################################################
-#add non-executables .cpp files to OBJS 
+#add non-executables .cpp files to OBJS
 #if .cpp file reside in a dir other than the current one, add .o rule below
 OBJS=$(OBJDIR)/arguments.o $(OBJDIR)/powerset.o \
 	$(OBJDIR)/fol.o $(OBJDIR)/listobj.o \
@@ -116,7 +116,7 @@ OBJS=$(OBJDIR)/arguments.o $(OBJDIR)/powerset.o \
 	$(OBJDIR)/lvrptptreesampling.o \
 	$(OBJDIR)/lvrptpsearchtree.o
 
-	
+
 #add .cpp files (including executables') to CPPFILES.
 CPPFILES=$(UTIL)/arguments.cpp $(UTIL)/powerset.cpp $(UTIL)/random.cpp\
 	$(PARSER)/fol.cpp $(PARSER)/listobj.cpp \
@@ -169,7 +169,7 @@ CPPFILES=$(UTIL)/arguments.cpp $(UTIL)/powerset.cpp $(UTIL)/random.cpp\
 	$(LIFTEDINFERTEST)/parser.cpp \
 	$(LIFTEDINFERTEST)/testmodelcount.cpp \
 	$(LIFTEDINFERTEST)/testformulainfer.cpp
-	
+
 ##############################################################################
 #EXECUTABLES: add executables rules here
 
@@ -198,7 +198,7 @@ $(OBJDIR)/infer.o:
 
 $(OBJDIR)/liftedinfer.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/liftedinfer.o -c $(LIFTEDINFER)/liftedinfer.cpp
-	
+
 $(OBJDIR)/runtestsmain.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/runtestsmain.o -c $(LIFTEDINFERTEST)/runtestsmain.cpp
 
@@ -215,7 +215,7 @@ $(OBJDIR)/learnstruct.o:
 
 $(OBJDIR)/fol.o: $(PARSER)/fol.y $(PARSER)/follex.y
 	$(REPLACEFOLY) $(PARSER)/fol.y $(BISON)
-	$(FLEX) -o$(PARSER)/follex.cpp $(PARSER)/follex.y 
+	$(FLEX) -o$(PARSER)/follex.cpp $(PARSER)/follex.y
 	$(BISON) $(PARSER)/fol.y;
 	mv -f fol.tab.c  $(PARSER)/fol.cpp
 	$(REPLACEFOLCPP) $(PARSER)/fol.cpp
@@ -237,38 +237,38 @@ $(OBJDIR)/random.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/random.o -c $(UTIL)/random.cpp
 
 $(OBJDIR)/listobj.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/listobj.o -c $(PARSER)/listobj.cpp 
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/listobj.o -c $(PARSER)/listobj.cpp
 
 $(OBJDIR)/predicatetemplate.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/predicatetemplate.o -c $(LOGIC)/predicatetemplate.cpp 
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/predicatetemplate.o -c $(LOGIC)/predicatetemplate.cpp
 
 $(OBJDIR)/functiontemplate.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/functiontemplate.o -c $(LOGIC)/functiontemplate.cpp 
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/functiontemplate.o -c $(LOGIC)/functiontemplate.cpp
 
 $(OBJDIR)/function.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/function.o -c $(LOGIC)/function.cpp 
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/function.o -c $(LOGIC)/function.cpp
 
 $(OBJDIR)/predicate.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/predicate.o -c $(LOGIC)/predicate.cpp 
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/predicate.o -c $(LOGIC)/predicate.cpp
 
 $(OBJDIR)/term.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/term.o -c $(LOGIC)/term.cpp
 
 $(OBJDIR)/domain.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/domain.o -c $(LOGIC)/domain.cpp  
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/domain.o -c $(LOGIC)/domain.cpp
 
 $(OBJDIR)/clause.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/clause.o -c $(LOGIC)/clause.cpp  
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/clause.o -c $(LOGIC)/clause.cpp
 
 $(OBJDIR)/clausesampler.o:
-	$(GPP) $(CFLAGS) -o $(OBJDIR)/clausesampler.o -c $(LOGIC)/clausesampler.cpp  
+	$(GPP) $(CFLAGS) -o $(OBJDIR)/clausesampler.o -c $(LOGIC)/clausesampler.cpp
 
 $(OBJDIR)/groundclause.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/groundclause.o -c $(INFER)/groundclause.cpp
 
 $(OBJDIR)/Polynomial.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/Polynomial.o -c $(LOGIC)/Polynomial.cpp
-	
+
 $(OBJDIR)/logichelper.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/logichelper.o -c $(LOGIC)/logichelper.cpp
 
@@ -332,7 +332,7 @@ $(OBJDIR)/lvrptptreesampling.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/lvrptptreesampling.o -c $(LIFTEDINFERCOMMON)$(SRCSUFFIX)/lvrptptreesampling.cpp
 $(OBJDIR)/lvrptpsearchtree.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/lvrptpsearchtree.o -c $(LIFTEDINFERCOMMON)$(SRCSUFFIX)/lvrptpsearchtree.cpp
-	
+
 $(OBJDIR)/blockexactinference.o:
 	$(GPP) $(CFLAGS) -o $(OBJDIR)/blockexactinference.o -c $(LIFTEDINFERBG)$(SRCSUFFIX)/blockexactinference.cpp
 $(OBJDIR)/clustercreator.o:
@@ -383,16 +383,1110 @@ depend:
 	@echo '    ' $(CPPFILES)
 	@( \
 	< $(MF) sed -n '1,/^###.*SUDDEN DEATH/p'; \
-	    echo '#' ; \
-	    echo '# dependencies generated on: ' `date` ; \
-	    echo '#' ; \
-	    for i in $(CPPFILES); do \
-	        echo -n "$(OBJDIR)/" ; \
-	        $(GPP) -MM $(CFLAGS) $$i ; \
-	        echo; \
-	    done \
+		echo '#' ; \
+		echo '# dependencies generated on: ' `date` ; \
+		echo '#' ; \
+		for i in $(CPPFILES); do \
+			KILL_ME=`$(GPP) -MM ${CFLAGS} $$i`; \
+			echo "$(OBJDIR)/$$KILL_ME"; \
+			echo; \
+		done \
 	) > $(MF).new
-	@mv $(MF) $(MF).last
-	@mv $(MF).new $(MF)
+	# @mv $(MF) $(MF).last
+	# @mv $(MF).new $(MF)
+
+debug:
+	for i in $(CPPFILES); do \
+		KILL_ME=`$(GPP) -MM ${CFLAGS} $$i`; \
+		echo "$(OBJDIR)/$$KILL_ME"; \
+		echo; \
+	done
+
+ugh:
+	KILL_ME=`$(GPP) -MM ${CFLAGS} ../src/liftedinfer/liftedweightedmodelcounting/src/ptpsearch.cpp`; \
+	echo $$KILL_ME
+
+
+files:
+	echo ${CPPFILES}
 
 ############ Everything below here is subject to SUDDEN DEATH #####
+#
+# dependencies generated on:  Fri Dec 28 14:59:14 PST 2018
+#
+../bin/obj/arguments.o: ../src/util/arguments.cpp ../src/util/arguments.h
+
+../bin/obj/powerset.o: ../src/util/powerset.cpp ../src/util/powerset.h \
+  ../src/util/array.h ../src/util/random.h
+
+../bin/obj/random.o: ../src/util/random.cpp ../src/util/random.h
+
+../bin/obj/fol.o: ../src/parser/fol.cpp ../src/parser/fol.h ../src/logic/mln.h \
+  ../src/logic/clause.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/parser/follex.cpp \
+  ../src/parser/folhelper.h ../src/parser/strfifolist.h \
+  ../src/logic/clausefactory.h ../src/parser/listobj.h \
+  ../src/util/timer.h ../src/parser/internals.h
+
+../bin/obj/listobj.o: ../src/parser/listobj.cpp ../src/parser/listobj.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/hashstring.h \
+  ../src/util/hasharray.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/logic/function.h ../src/util/arraysaccessor.h
+
+../bin/obj/predicatetemplate.o: ../src/logic/predicatetemplate.cpp \
+  ../src/logic/predicatetemplate.h ../src/util/array.h \
+  ../src/util/random.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/functiontemplate.h ../src/logic/predicate.h \
+  ../src/logic/term.h ../src/util/hash.h ../src/util/hasharray.h \
+  ../src/logic/function.h
+
+../bin/obj/functiontemplate.o: ../src/logic/functiontemplate.cpp \
+  ../src/logic/functiontemplate.h ../src/logic/predicatetemplate.h \
+  ../src/util/array.h ../src/util/random.h ../src/logic/domain.h \
+  ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h
+
+../bin/obj/function.o: ../src/logic/function.cpp ../src/logic/function.h \
+  ../src/logic/functiontemplate.h ../src/logic/predicatetemplate.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/hash.h \
+  ../src/logic/term.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicate.h ../src/util/hasharray.h
+
+../bin/obj/predicate.o: ../src/logic/predicate.cpp ../src/logic/predicate.h \
+  ../src/logic/predicatetemplate.h ../src/util/array.h \
+  ../src/util/random.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/logic/functiontemplate.h ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h
+
+../bin/obj/term.o: ../src/logic/term.cpp ../src/logic/term.h ../src/util/array.h \
+  ../src/util/random.h ../src/logic/function.h \
+  ../src/logic/functiontemplate.h ../src/logic/predicatetemplate.h \
+  ../src/util/hash.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicate.h ../src/util/hasharray.h
+
+../bin/obj/domain.o: ../src/logic/domain.cpp ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/constdualmap.h \
+  ../src/util/strint.h ../src/logic/predicatetemplate.h \
+  ../src/logic/functiontemplate.h ../src/logic/predicate.h \
+  ../src/logic/term.h ../src/util/hash.h ../src/util/hasharray.h \
+  ../src/logic/function.h ../src/util/hashstring.h \
+  ../src/util/hashlist.h ../src/util/arraysaccessor.h \
+  ../src/util/powerset.h ../src/util/multdarray.h ../src/util/hashint.h \
+  ../src/logic/database.h ../src/logic/groundpreds.h \
+  ../src/infer/groundpredicate.h ../src/infer/groundclause.h \
+  ../src/logic/clausesampler.h ../src/logic/truefalsegroundingsstore.h \
+  ../src/logic/clausehelper.h ../src/logic/mln.h \
+  ../src/logic/mlnhelper.h
+
+../bin/obj/clause.o: ../src/logic/clause.cpp ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/constdualmap.h \
+  ../src/util/strint.h ../src/logic/predicatetemplate.h \
+  ../src/logic/functiontemplate.h ../src/logic/predicate.h \
+  ../src/logic/term.h ../src/util/hash.h ../src/util/hasharray.h \
+  ../src/logic/function.h ../src/util/hashstring.h \
+  ../src/util/hashlist.h ../src/util/arraysaccessor.h \
+  ../src/util/powerset.h ../src/util/multdarray.h ../src/util/hashint.h \
+  ../src/logic/database.h ../src/logic/groundpreds.h \
+  ../src/infer/groundpredicate.h ../src/infer/groundclause.h \
+  ../src/logic/clausesampler.h ../src/logic/truefalsegroundingsstore.h \
+  ../src/logic/clausehelper.h ../src/infer/mrf.h ../src/util/timer.h \
+  ../src/logic/mln.h ../src/logic/mlnhelper.h ../src/infer/variable.h \
+  ../src/util/util.h ../src/infer/superclause.h ../src/infer/hypercube.h \
+  ../src/infer/inferutil.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h
+
+../bin/obj/clausesampler.o: ../src/logic/clausesampler.cpp \
+  ../src/logic/clausesampler.h ../src/logic/database.h \
+  ../src/util/hash.h ../src/util/array.h ../src/util/random.h \
+  ../src/logic/groundpreds.h ../src/logic/predicate.h \
+  ../src/logic/predicatetemplate.h ../src/logic/term.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/logic/functiontemplate.h ../src/logic/domain.h \
+  ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/util/arraysaccessor.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/truefalsegroundingsstore.h \
+  ../src/logic/clause.h ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/powerset.h ../src/util/multdarray.h ../src/util/hashint.h \
+  ../src/logic/clausehelper.h
+
+../bin/obj/groundclause.o: ../src/infer/groundclause.cpp ../src/infer/groundclause.h \
+  ../src/util/hasharray.h ../src/util/random.h ../src/util/array.h \
+  ../src/util/hash.h ../src/infer/groundpredicate.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/logic/clause.h ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mln.h ../src/logic/mlnhelper.h
+
+../bin/obj/learnwts.o: ../src/learnwts/learnwts.cpp ../src/util/arguments.h \
+  ../src/infer/inferenceargs.h ../src/infer/inferutil.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/hashint.h \
+  ../src/util/hasharray.h ../src/util/hash.h ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/learnwts/lbfgsb.h ../src/util/timer.h \
+  ../src/learnwts/pseudologlikelihood.h ../src/logic/mln.h \
+  ../src/logic/mlnhelper.h ../src/learnwts/indextranslator.h \
+  ../src/logic/Polynomial.h ../src/learnwts/discriminativelearner.h \
+  ../src/infer/infer.h ../src/util/util.h ../src/parser/fol.h \
+  ../src/infer/mrf.h ../src/learnwts/learnwts.h \
+  ../src/infer/maxwalksat.h ../src/infer/sat.h ../src/infer/inference.h \
+  ../src/logic/variablestate.h ../src/logic/hvariablestate.h \
+  ../src/learnwts/lbfgsp.h ../src/logic/logsigmoid.h \
+  ../src/logic/logichelper.h ../src/infer/maxwalksatparams.h \
+  ../src/infer/samplesatparams.h ../src/infer/mcsat.h \
+  ../src/infer/mcmc.h ../src/infer/mcmcparams.h \
+  ../src/infer/mcsatparams.h ../src/infer/unitpropagation.h \
+  ../src/infer/gibbssampler.h ../src/infer/gibbsparams.h \
+  ../src/infer/convergencetest.h ../src/util/meanvariance.h \
+  ../src/infer/gelmanconvergencetest.h ../src/infer/simulatedtempering.h \
+  ../src/infer/simulatedtemperingparams.h ../src/infer/bp.h \
+  ../src/infer/bpparams.h ../src/infer/twowaymessage.h \
+  ../src/infer/superclause.h ../src/infer/variable.h \
+  ../src/infer/hypercube.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/auxfactor.h \
+  ../src/infer/factor.h ../src/infer/link.h ../src/infer/node.h \
+  ../src/infer/superpred.h ../src/infer/clausecounter.h \
+  ../src/infer/factorgraph.h ../src/logic/clausefactory.h \
+  ../src/infer/hmcsat.h ../src/infer/hmaxwalksat.h \
+  ../src/liftedinfer/bridge/includes/lbginference.h \
+  ../src/liftedinfer/bridge/includes/liftedalgsconvertor.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/bridge/includes/liftedalgshandler.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/clustercreator.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/ptpsampler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/gibbsprocesshandler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lbgsampler.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalconstructor.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/filedump.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/lisapproxinference.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h
+
+../bin/obj/infer.o: ../src/infer/infer.cpp ../src/parser/fol.h ../src/logic/mln.h \
+  ../src/logic/clause.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/util/arguments.h ../src/util/util.h \
+  ../src/infer/infer.h ../src/infer/mrf.h ../src/util/timer.h \
+  ../src/learnwts/learnwts.h ../src/learnwts/indextranslator.h \
+  ../src/infer/inferenceargs.h ../src/infer/inferutil.h \
+  ../src/infer/maxwalksat.h ../src/infer/sat.h ../src/infer/inference.h \
+  ../src/logic/variablestate.h ../src/logic/hvariablestate.h \
+  ../src/logic/Polynomial.h ../src/learnwts/lbfgsp.h \
+  ../src/logic/logsigmoid.h ../src/logic/logichelper.h \
+  ../src/infer/maxwalksatparams.h ../src/infer/samplesatparams.h \
+  ../src/infer/mcsat.h ../src/infer/mcmc.h ../src/infer/mcmcparams.h \
+  ../src/infer/mcsatparams.h ../src/infer/unitpropagation.h \
+  ../src/infer/gibbssampler.h ../src/infer/gibbsparams.h \
+  ../src/infer/convergencetest.h ../src/util/meanvariance.h \
+  ../src/infer/gelmanconvergencetest.h ../src/infer/simulatedtempering.h \
+  ../src/infer/simulatedtemperingparams.h ../src/infer/bp.h \
+  ../src/infer/bpparams.h ../src/infer/twowaymessage.h \
+  ../src/infer/superclause.h ../src/infer/variable.h \
+  ../src/infer/hypercube.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/auxfactor.h \
+  ../src/infer/factor.h ../src/infer/link.h ../src/infer/node.h \
+  ../src/infer/superpred.h ../src/infer/clausecounter.h \
+  ../src/infer/factorgraph.h ../src/logic/clausefactory.h \
+  ../src/infer/hmcsat.h ../src/infer/hmaxwalksat.h
+
+../bin/obj/learnstruct.o: ../src/learnstruct/learnstruct.cpp ../src/util/arguments.h \
+  ../src/parser/fol.h ../src/logic/mln.h ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/constdualmap.h \
+  ../src/util/strint.h ../src/logic/predicatetemplate.h \
+  ../src/logic/functiontemplate.h ../src/logic/predicate.h \
+  ../src/logic/term.h ../src/util/hash.h ../src/util/hasharray.h \
+  ../src/logic/function.h ../src/util/hashstring.h \
+  ../src/util/hashlist.h ../src/util/arraysaccessor.h \
+  ../src/util/powerset.h ../src/util/multdarray.h ../src/util/hashint.h \
+  ../src/logic/database.h ../src/logic/groundpreds.h \
+  ../src/infer/groundpredicate.h ../src/infer/groundclause.h \
+  ../src/logic/clausesampler.h ../src/logic/truefalsegroundingsstore.h \
+  ../src/logic/clausehelper.h ../src/logic/mlnhelper.h \
+  ../src/learnwts/learnwts.h ../src/util/util.h ../src/util/timer.h \
+  ../src/learnwts/indextranslator.h ../src/learnstruct/structlearn.h \
+  ../src/logic/clausefactory.h ../src/learnwts/lbfgsb.h \
+  ../src/learnwts/pseudologlikelihood.h ../src/logic/Polynomial.h \
+  ../src/learnwts/discriminativelearner.h ../src/infer/infer.h \
+  ../src/infer/mrf.h ../src/infer/inferenceargs.h \
+  ../src/infer/inferutil.h ../src/infer/maxwalksat.h ../src/infer/sat.h \
+  ../src/infer/inference.h ../src/logic/variablestate.h \
+  ../src/logic/hvariablestate.h ../src/learnwts/lbfgsp.h \
+  ../src/logic/logsigmoid.h ../src/logic/logichelper.h \
+  ../src/infer/maxwalksatparams.h ../src/infer/samplesatparams.h \
+  ../src/infer/mcsat.h ../src/infer/mcmc.h ../src/infer/mcmcparams.h \
+  ../src/infer/mcsatparams.h ../src/infer/unitpropagation.h \
+  ../src/infer/gibbssampler.h ../src/infer/gibbsparams.h \
+  ../src/infer/convergencetest.h ../src/util/meanvariance.h \
+  ../src/infer/gelmanconvergencetest.h ../src/infer/simulatedtempering.h \
+  ../src/infer/simulatedtemperingparams.h ../src/infer/bp.h \
+  ../src/infer/bpparams.h ../src/infer/twowaymessage.h \
+  ../src/infer/superclause.h ../src/infer/variable.h \
+  ../src/infer/hypercube.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/auxfactor.h \
+  ../src/infer/factor.h ../src/infer/link.h ../src/infer/node.h \
+  ../src/infer/superpred.h ../src/infer/clausecounter.h \
+  ../src/infer/factorgraph.h ../src/infer/hmcsat.h \
+  ../src/infer/hmaxwalksat.h
+
+../bin/obj/Polynomial.o: ../src/logic/Polynomial.cpp ../src/logic/Polynomial.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/complex.h
+
+../bin/obj/logichelper.o: ../src/logic/logichelper.cpp ../src/logic/logichelper.h \
+  ../src/util/array.h ../src/util/random.h
+
+../bin/obj/inferutil.o: ../src/infer/inferutil.cpp ../src/infer/inferutil.h \
+  ../src/util/array.h ../src/util/random.h ../src/util/hashint.h \
+  ../src/util/hasharray.h ../src/util/hash.h ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h
+
+../bin/obj/createhypercube.o: ../src/infer/createhypercube.cpp \
+  ../src/infer/hypercube.h ../src/util/util.h ../src/util/array.h \
+  ../src/util/random.h ../src/util/hashint.h ../src/util/hasharray.h \
+  ../src/util/hash.h ../src/infer/inferutil.h ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/infer/hypercuberefinement.h ../src/logic/mln.h \
+  ../src/logic/mlnhelper.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h ../src/infer/mrf.h \
+  ../src/util/timer.h
+
+../bin/obj/createhypercubebasic.o: ../src/infer/createhypercubebasic.cpp \
+  ../src/infer/hypercube.h ../src/util/util.h ../src/util/array.h \
+  ../src/util/random.h ../src/util/hashint.h ../src/util/hasharray.h \
+  ../src/util/hash.h ../src/infer/inferutil.h ../src/logic/clause.h \
+  ../src/logic/domain.h ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/infer/hypercuberefinement.h ../src/logic/mln.h \
+  ../src/logic/mlnhelper.h
+
+../bin/obj/createhypercubedt.o: ../src/infer/createhypercubedt.cpp \
+  ../src/util/hashint.h ../src/util/hasharray.h ../src/util/random.h \
+  ../src/util/hash.h ../src/util/array.h ../src/infer/inferutil.h \
+  ../src/logic/clause.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/infer/hypercube.h ../src/util/util.h \
+  ../src/infer/hypercuberefinement.h ../src/logic/mln.h \
+  ../src/logic/mlnhelper.h
+
+../bin/obj/joinhypercube.o: ../src/infer/joinhypercube.cpp ../src/util/util.h \
+  ../src/infer/hypercube.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/hashint.h ../src/util/hasharray.h ../src/util/hash.h \
+  ../src/infer/inferutil.h ../src/logic/clause.h ../src/logic/domain.h \
+  ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/infer/hypercubereverseindex.h ../src/infer/mrf.h \
+  ../src/util/timer.h ../src/logic/mln.h ../src/logic/mlnhelper.h \
+  ../src/infer/partialgndhctuple.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/superclause.h \
+  ../src/infer/variable.h
+
+../bin/obj/refinehypercube.o: ../src/infer/refinehypercube.cpp ../src/util/util.h \
+  ../src/infer/hypercube.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/hashint.h ../src/util/hasharray.h ../src/util/hash.h \
+  ../src/infer/inferutil.h ../src/logic/clause.h ../src/logic/domain.h \
+  ../src/util/equalstr.h ../src/util/dualmap.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/infer/hypercuberefinement.h ../src/logic/mln.h \
+  ../src/logic/mlnhelper.h
+
+../bin/obj/superpred.o: ../src/infer/superpred.cpp ../src/util/util.h \
+  ../src/infer/mrf.h ../src/util/timer.h ../src/logic/mln.h \
+  ../src/logic/clause.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/infer/superclause.h \
+  ../src/infer/variable.h ../src/infer/hypercube.h \
+  ../src/infer/inferutil.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/superpred.h \
+  ../src/infer/clausecounter.h
+
+../bin/obj/superclause.o: ../src/infer/superclause.cpp ../src/util/util.h \
+  ../src/infer/mrf.h ../src/util/timer.h ../src/logic/mln.h \
+  ../src/logic/clause.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/infer/superclause.h \
+  ../src/infer/variable.h ../src/infer/hypercube.h \
+  ../src/infer/inferutil.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/superpred.h \
+  ../src/infer/clausecounter.h
+
+../bin/obj/node.o: ../src/infer/node.cpp ../src/infer/node.h ../src/util/util.h \
+  ../src/infer/mrf.h ../src/util/timer.h ../src/logic/mln.h \
+  ../src/logic/clause.h ../src/logic/domain.h ../src/util/equalstr.h \
+  ../src/util/dualmap.h ../src/util/array.h ../src/util/random.h \
+  ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/infer/link.h ../src/infer/superpred.h \
+  ../src/infer/clausecounter.h ../src/infer/inferutil.h \
+  ../src/infer/superclause.h ../src/infer/variable.h \
+  ../src/infer/hypercube.h ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/twowaymessage.h \
+  ../src/infer/factor.h
+
+../bin/obj/factor.o: ../src/infer/factor.cpp ../src/infer/factor.h \
+  ../src/util/util.h ../src/infer/mrf.h ../src/util/timer.h \
+  ../src/logic/mln.h ../src/logic/clause.h ../src/logic/domain.h \
+  ../src/util/equalstr.h ../src/util/dualmap.h ../src/util/array.h \
+  ../src/util/random.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/infer/link.h ../src/infer/node.h \
+  ../src/infer/superpred.h ../src/infer/clausecounter.h \
+  ../src/infer/inferutil.h ../src/infer/superclause.h \
+  ../src/infer/variable.h ../src/infer/hypercube.h \
+  ../src/infer/hypercubeoperations.h \
+  ../src/infer/hypercubereverseindex.h \
+  ../src/infer/hypercuberefinement.h ../src/infer/twowaymessage.h
+
+../bin/obj/liftedalgsconvertor.o: \
+  ../src/liftedinfer/bridge/src/liftedalgsconvertor.cpp \
+  ../src/liftedinfer/bridge/includes/liftedalgsconvertor.h \
+  ../src/logic/mln.h ../src/logic/clause.h ../src/logic/domain.h \
+  ../src/util/equalstr.h ../src/util/dualmap.h ../src/util/array.h \
+  ../src/util/random.h ../src/util/constdualmap.h ../src/util/strint.h \
+  ../src/logic/predicatetemplate.h ../src/logic/functiontemplate.h \
+  ../src/logic/predicate.h ../src/logic/term.h ../src/util/hash.h \
+  ../src/util/hasharray.h ../src/logic/function.h \
+  ../src/util/hashstring.h ../src/util/hashlist.h \
+  ../src/util/arraysaccessor.h ../src/util/powerset.h \
+  ../src/util/multdarray.h ../src/util/hashint.h ../src/logic/database.h \
+  ../src/logic/groundpreds.h ../src/infer/groundpredicate.h \
+  ../src/infer/groundclause.h ../src/logic/clausesampler.h \
+  ../src/logic/truefalsegroundingsstore.h ../src/logic/clausehelper.h \
+  ../src/logic/mlnhelper.h ../src/logic/variablestate.h \
+  ../src/infer/mrf.h ../src/util/timer.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/bridge/includes/liftedalgshandler.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/clustercreator.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/ptpsampler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/gibbsprocesshandler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lbgsampler.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalconstructor.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/filedump.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/lisapproxinference.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h
+
+../bin/obj/liftedalgshandler.o: ../src/liftedinfer/bridge/src/liftedalgshandler.cpp \
+  ../src/liftedinfer/bridge/includes/liftedalgshandler.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/clustercreator.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/ptpsampler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/gibbsprocesshandler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lbgsampler.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalconstructor.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/filedump.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/lisapproxinference.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/wmconvertor.h
+
+../bin/obj/decomposer.o: ../src/liftedinfer/common/src/decomposer.cpp \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h
+
+../bin/obj/fileutils.o: ../src/liftedinfer/common/src/fileutils.cpp \
+  ../src/liftedinfer/common/includes/fileutils.h \
+  ../src/liftedinfer/common/includes/logdouble.h
+
+../bin/obj/heuristics.o: ../src/liftedinfer/common/src/heuristics.cpp \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h
+
+../bin/obj/logdouble.o: ../src/liftedinfer/common/src/logdouble.cpp \
+  ../src/liftedinfer/common/includes/logdouble.h
+
+../bin/obj/lvrmln.o: ../src/liftedinfer/common/src/lvrmln.cpp \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h
+
+../bin/obj/mathutils.o: ../src/liftedinfer/common/src/mathutils.cpp \
+  ../src/liftedinfer/common/includes/mathutils.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/normalizer.o: ../src/liftedinfer/common/src/normalizer.cpp \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/src/setutils.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/common/includes/normpreservinggrounder.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/propositionalresolution.o: \
+  ../src/liftedinfer/common/src/propositionalresolution.cpp \
+  ../src/liftedinfer/common/includes/propositionalresolution.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h
+
+../bin/obj/queryupdater.o: ../src/liftedinfer/common/src/queryupdater.cpp \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/fileutils.h
+
+../bin/obj/samplingalgs.o: ../src/liftedinfer/common/src/samplingalgs.cpp \
+  ../src/liftedinfer/common/includes/samplingalgs.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/mathutils.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/randomgenutil.o: ../src/liftedinfer/common/src/randomgenutil.cpp \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/lvrptptreesampling.o: \
+  ../src/liftedinfer/common/src/lvrptptreesampling.cpp \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h
+
+../bin/obj/lvrptpsearchtree.o: ../src/liftedinfer/common/src/lvrptpsearchtree.cpp \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/mathutils.h
+
+../bin/obj/blockexactinference.o: \
+  ../src/liftedinfer/liftedblockedgibbs/src/blockexactinference.cpp \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h
+
+../bin/obj/clustercreator.o: \
+  ../src/liftedinfer/liftedblockedgibbs/src/clustercreator.cpp \
+  ../src/liftedinfer/liftedblockedgibbs/includes/clustercreator.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/ptpsampler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/lvparams.h
+
+../bin/obj/lbgsampler.o: ../src/liftedinfer/liftedblockedgibbs/src/lbgsampler.cpp \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lbgsampler.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/ptpsampler.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h
+
+../bin/obj/lvrcluster.o: ../src/liftedinfer/liftedblockedgibbs/src/lvrcluster.cpp \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/ptpsampler.o: ../src/liftedinfer/liftedblockedgibbs/src/ptpsampler.cpp \
+  ../src/liftedinfer/liftedblockedgibbs/includes/ptpsampler.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/lvrcluster.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h
+
+../bin/obj/lisapproxinference.o: \
+  ../src/liftedinfer/liftedimportancesampling/src/lisapproxinference.cpp \
+  ../src/liftedinfer/liftedimportancesampling/includes/lisapproxinference.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/common/includes/mathutils.h \
+  ../src/liftedinfer/common/includes/samplingalgs.h \
+  ../src/liftedinfer/common/includes/queryupdater.h
+
+../bin/obj/proposalconstructor.o: \
+  ../src/liftedinfer/liftedimportancesampling/src/proposalconstructor.cpp \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalconstructor.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/filedump.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/liftedimportancesampling/includes/lisapproxinference.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h
+
+../bin/obj/proposalstructure.o: \
+  ../src/liftedinfer/liftedimportancesampling/src/proposalstructure.cpp \
+  ../src/liftedinfer/liftedimportancesampling/includes/proposalstructure.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/filedump.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/cache.o: ../src/liftedinfer/liftedweightedmodelcounting/src/cache.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h
+
+../bin/obj/extensions.o: \
+  ../src/liftedinfer/liftedweightedmodelcounting/src/extensions.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h
+
+../bin/obj/ptpsearch.o: \
+  ../src/liftedinfer/liftedweightedmodelcounting/src/ptpsearch.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/propositionalresolution.h \
+  ../src/liftedinfer/common/includes/rulesutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h
+
+../bin/obj/resolver.o: \
+  ../src/liftedinfer/liftedweightedmodelcounting/src/resolver.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h
+
+../bin/obj/sampler.o: ../src/liftedinfer/liftedweightedmodelcounting/src/sampler.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h
+
+../bin/obj/splitter.o: \
+  ../src/liftedinfer/liftedweightedmodelcounting/src/splitter.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h
+
+../bin/obj/unifier.o: ../src/liftedinfer/liftedweightedmodelcounting/src/unifier.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h
+
+../bin/obj/wmconvertor.o: \
+  ../src/liftedinfer/liftedweightedmodelcounting/src/wmconvertor.cpp \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/wmconvertor.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h
+
+../bin/obj/parser.o: ../src/liftedinfer/tests/parser.cpp \
+  ../src/liftedinfer/tests/parser.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h
+
+../bin/obj/testmodelcount.o: ../src/liftedinfer/tests/testmodelcount.cpp \
+  ../src/liftedinfer/tests/testmodelcount.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/wmconvertor.h \
+  ../src/liftedinfer/tests/parser.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h
+
+../bin/obj/testformulainfer.o: ../src/liftedinfer/tests/testformulainfer.cpp \
+  ../src/liftedinfer/tests/testformulainfer.h \
+  ../src/liftedinfer/common/includes/lvrmln.h \
+  ../src/liftedinfer/common/includes/logdouble.h \
+  ../src/liftedinfer/common/includes/paramconstants.h \
+  ../src/liftedinfer/liftedblockedgibbs/includes/blockexactinference.h \
+  ../src/liftedinfer/common/includes/decomposer.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/splitter.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/sampler.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/resolver.h \
+  ../src/liftedinfer/common/includes/heuristics.h \
+  ../src/liftedinfer/common/includes/normalizer.h \
+  ../src/liftedinfer/common/includes/clusterutil.h \
+  ../src/liftedinfer/common/includes/cleanuputils.h \
+  ../src/liftedinfer/common/includes/ptptree.h \
+  ../src/liftedinfer/common/includes/lvrnormpropagation.h \
+  ../src/liftedinfer/common/includes/hashalgorithm.h \
+  ../src/liftedinfer/common/includes/lvrpermutations.h \
+  ../src/liftedinfer/common/includes/randomgenutil.h \
+  ../src/liftedinfer/common/includes/lvrsingletonnormpropagation.h \
+  ../src/liftedinfer/common/includes/lvrptptreesampling.h \
+  ../src/liftedinfer/tests/parser.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/ptpsearch.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/extensions.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/cache.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/unifier.h \
+  ../src/liftedinfer/common/includes/lvparams.h \
+  ../src/infer/mcmcparams.h \
+  ../src/liftedinfer/common/includes/lvrptpsearchtree.h \
+  ../src/liftedinfer/common/includes/queryupdater.h \
+  ../src/liftedinfer/common/includes/lvratomhashtemplate.h \
+  ../src/liftedinfer/liftedweightedmodelcounting/includes/wmconvertor.h \
+  ../src/liftedinfer/common/includes/stringconversionutils.h
+
