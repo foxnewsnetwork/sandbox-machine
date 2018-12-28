@@ -99,6 +99,10 @@ Anyway, after all this, I'm *finally* able to `make depend`
 
 However, upon running `make` when the configured makefile, everything breaks due to c++ type checks (pls kill me)
 
+Things to try next time
+
+- [ ] mac-osx install [issues][14] may be due to inappropriate gcc version (needs 4.9)
+- [ ] I should consult the install instructions on their [site][13]
 
 # Appendix
 
@@ -240,3 +244,5 @@ As usual, see the raw souce version of this page to view the entire bibliography
 [10]: <https://stackoverflow.com/questions/16931770/makefile4-missing-separator-stop> "Stackoverflow - Makefile Missing Separator Stop"
 [11]: <https://editorconfig.org/> "EditorConfig"
 [12]: <https://gcc.gnu.org/onlinedocs/gcc/Preprocessor-Options.html> "g++ preprocess options"
+[13]: <http://alchemy.cs.washington.edu/requirements.html> "Alchemy Installation Requirements"
+[14]: <https://code.google.com/archive/p/alchemy-2/issues/13> "MacOSX Installation Issue from Google Code"
