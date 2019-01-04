@@ -4,7 +4,8 @@
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
-    "clean": "bsb -clean-world"
+    "clean": "bsb -clean-world",
+    "make:calculator": "node src/Calculator.bs.js > dist/calculator-parser.js"
   },
   "keywords": [
     "BuckleScript"

@@ -1,5 +1,7 @@
 # Getting Started With Jison
 
+Consult the ultimate bison docs [here][22]
+
 Naturally, as I learn more about computer science, I would need to learn more computer languages; and using [jison][1] to build some basic calculator or compiler would be a great way to get my feet wet in the world of programming languages. This journal entry will be my first foray into building a compiler that translates a language into javascript. 
 
 The ultimate goal of this project would be the creation of a ML-enabled meta-compiler that puts together to-js application-specific compilers. The code for this lives [here](../ailang)
@@ -126,10 +128,22 @@ First things first, I want to get a "hello world" example going by setting up my
 The parser is essentially a glorified series of function calls, and it seems here are its parameters:
 
 ```typescript
-type action = (yytext, yyleng, yylineno, yy, yystate, $$, _$) => any
+type action<SharedState> = (
+  yytext: string, 
+  yyleng: number, 
+  yylineno: number, 
+  yy: SharedState, 
+  yystate, 
+  $$, 
+  _$
+) => any
 ```
 
 So what's the deal with all the "yy" stuff? read about it [here][18]
+
+Apparently, the `yy` stuff all come from [bison action constructs][21]; at the end of the day, actions are simply different ways of invoking a function
+
+In any case, it's relatively simple to use the jison to build a parser; go into the `ailang` directory and run `yarn run make:calculator` to bake one into the `dist` directory
 
 # Appendix
 
@@ -148,11 +162,50 @@ digraph rust {
   ocaml -> stage0
   stage0 -> cargo
   cargo -> "compile.rs"
-  "compile.rs" -> "std library"
+  "compile.rs" -> "stdlib"
 }
 ```
 
 In general, this seems to be order of how seeming self-implementing languages bootstrap themselves - they all start from some other language
+
+## A2 - Jison's Parse Function
+
+[jison's parse function][23] introduces a number of javascript notations that I am *not* familar with, notably:
+
+```javascript
+function parse(x) {
+  before:
+    console.log(x);
+
+  success:
+    return "success";
+  
+  error:
+    return "error";
+}
+```
+
+What does this even do? Running this in my browser gets me the following:
+
+```sh
+$ parse(234)
+234
+"success"
+```
+
+Note that this is apparently not a strict mode thing as adding in `"use strict";` does nothing.
+
+After some research, apparently these are called [labels][24], and are a way for loops to "goto" each other.
+
+In jison, the labels are used around [json selection](https://github.com/zaach/jison/blob/bcf986e180359aa2404b1b73ecbfef1df4c6b011/lib/jison.js#L1091) such as:
+
+```javascript
+var labeled = JSONSelect.match(':has(:root > .label > .name:val("_token_stack"))', ast);
+```
+
+Apparently, this is how one achieves "metaprogramming" in the world of javascript (cool, but dangerous!)
+
+Read more about [jsonselect here][25]; I would *NOT* recomend using though, while intelligence does arise from meta-programming, it does make the program opaque as all hell as we're now dependent upon emergence for computer behavior
 
 # References
 
@@ -178,3 +231,8 @@ As usual, see this page in raw to view my bibliography
 [18]: <http://zaa.ch/jison/docs/#sharing-scope> "Sharing scope aka all the yy stuff"
 [19]: <https://github.com/rust-lang/rust/issues/40991#issuecomment-290917501> "Some dude comments on the history of rust compiler bootstraping itself"
 [20]: <https://github.com/rust-lang/rust> "Rust Language Github"
+[21]: <http://www.gnu.org/software/bison/manual/html_node/Action-Features.html#Action-Features> "Bison Action Constructs"
+[22]: <http://www.gnu.org/software/bison/manual/html_node/index.html#SEC_Contents> "GNU Bison Docs Table of Contents"
+[23]: <https://github.com/zaach/jison/blob/bcf986e180359aa2404b1b73ecbfef1df4c6b011/lib/jison.js#L1370-L1607> "Jison's confusing parse function"
+[24]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label> "JavaScript labeled loops"
+[25]: <https://github.com/lloyd/JSONSelect/blob/master/JSONSelect.md> "JSONSelect - aka how to metaprogram in js"
