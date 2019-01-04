@@ -131,6 +131,29 @@ type action = (yytext, yyleng, yylineno, yy, yystate, $$, _$) => any
 
 So what's the deal with all the "yy" stuff? read about it [here][18]
 
+# Appendix
+
+As usual, the appendix carries content interesting or relevant here, but doesn't fit directly into the exact up-top themed narrative
+
+## A1 - On How Compilers Bootstrap Themselves
+
+One of the really weird things about modern production-tier programming languages is that, if you look at their github source, it seems the language is written in the language itself - which is ridiculous as this is clearly an infinite regress and absolutely begs the question of how such a system could get started in the first place.
+
+Consider the case of [rustlang][20], According to the breakdown, it seems rust is written in ~97% rust itself, which makes no sense. After a bit of digging, apparently, the rust compiler is a series of stages that compiles a compiler for the next stage 
+
+According to [this comment][19], it seems stage0 rust compiler was written in ocaml some time ago; anyway, consider the diagram:
+
+```dot
+digraph rust {
+  ocaml -> stage0
+  stage0 -> cargo
+  cargo -> "compile.rs"
+  "compile.rs" -> "std library"
+}
+```
+
+In general, this seems to be order of how seeming self-implementing languages bootstrap themselves - they all start from some other language
+
 # References
 
 As usual, see this page in raw to view my bibliography
@@ -153,3 +176,5 @@ As usual, see this page in raw to view my bibliography
 [16]: <https://coffeescript.org/v1/annotated-source/grammar.html> "Grammar of Coffeescript"
 [17]: <https://coffeescript.org/v1/annotated-source/lexer.html> "Coffeescript Lexer"
 [18]: <http://zaa.ch/jison/docs/#sharing-scope> "Sharing scope aka all the yy stuff"
+[19]: <https://github.com/rust-lang/rust/issues/40991#issuecomment-290917501> "Some dude comments on the history of rust compiler bootstraping itself"
+[20]: <https://github.com/rust-lang/rust> "Rust Language Github"
