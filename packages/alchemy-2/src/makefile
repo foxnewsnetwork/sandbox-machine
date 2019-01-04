@@ -1,6 +1,7 @@
+SHELL=/bin/bash
 INLINE_LIMIT=-finline-limit=100000
 #INLINE_WARN=-Winline
-STATIC=-static
+STATIC=-dynamic
 
 ######### Profile
 #CLFLAGS=-pg -g $(STATIC) -DNDEBUG $(INLINE_WARN) $(INLINE_LIMIT)
@@ -19,7 +20,7 @@ CLFLAGS=-g
 
 BASEDIR=..
 
-GPP=g++
+GPP=g++-4.9
 FLEX=flex
 BISON=bison
 
@@ -392,8 +393,8 @@ depend:
 			echo; \
 		done \
 	) > $(MF).new
-	# @mv $(MF) $(MF).last
-	# @mv $(MF).new $(MF)
+	@mv $(MF) $(MF).last
+	@mv $(MF).new $(MF)
 
 debug:
 	for i in $(CPPFILES); do \
@@ -412,7 +413,7 @@ files:
 
 ############ Everything below here is subject to SUDDEN DEATH #####
 #
-# dependencies generated on:  Fri Dec 28 14:59:14 PST 2018
+# dependencies generated on:  Fri Jan 4 11:13:56 PST 2019
 #
 ../bin/obj/arguments.o: ../src/util/arguments.cpp ../src/util/arguments.h
 

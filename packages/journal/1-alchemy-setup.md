@@ -101,8 +101,15 @@ However, upon running `make` when the configured makefile, everything breaks due
 
 Things to try next time
 
-- [ ] mac-osx install [issues][14] may be due to inappropriate gcc version (needs 4.9)
-- [ ] I should consult the install instructions on their [site][13]
+- [x] mac-osx install [issues][14] may be due to inappropriate gcc version (needs 4.9)
+  - I will run `brew install gcc49` in an attempt to perform this job
+  - Then, I edit the makefile to use the new version
+  ```makefile
+  GPP=g++-4.9
+  ```
+- [x] I should consult the install instructions on their [site][13]
+
+*HOORAY* it finally compiled (although after a *lot* of warnings lol)
 
 # Appendix
 
