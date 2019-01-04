@@ -19,6 +19,10 @@ TODOs
 
 Although I have no real hard evidence, my inner support vector machine is drawing an analogy between machine learning and language construction. Now, I know next to nothing about how to construct a language, so I want to fix this by learning how to use bison to construct a language. See [first journal entry here](./packages/journal/2-start-jison.md)
 
+### 3 - First Steps in Using Alchemy
+
+After an extremely painful slog through `make` and `c++`, I finally managed to build alchemy, now to actually use it! See the [journal entry here](./packages/journal/3-using-alchemy.md)
+
 ### ? - Parse and Setup Video Streams
 
 One obvious application of ML is to process images and streams of images (aka video) for the purposes of automating game-playing or web surfing. I would like to use something like [libsdl](https://www.libsdl.org/) to stream-capture and process in hopes of furthering the ultimate goal to build a machine that can do my job
