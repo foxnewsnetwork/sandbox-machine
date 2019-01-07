@@ -23,6 +23,22 @@ Although I have no real hard evidence, my inner support vector machine is drawin
 
 After an extremely painful slog through `make` and `c++`, I finally managed to build alchemy, now to actually use it! See the [journal entry here](./packages/journal/3-using-alchemy.md)
 
+### 4 - First Steps in Graphical Models
+
+After a bit of using alchemy and research, it seems that Domingos's Markov Logic Networks are instances of Markov Random Fields except where nodes contain first order logic formula instead of states (or measurables in the case of hidden markov).
+
+However, I'm currently unfamiliar with markov random fields (or really the entire world of graphical probabilistic models), so I will endeavor to start learning it. See the [journal entry here](./packages/journal/4-start-graphical-models.md)
+
+### ? - Learn Rust Concepts
+
+[Rust](https://www.rust-lang.org/) ships with the following 3 interesting concepts:
+
+- [ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+- [traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+- [lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+
+In the process of learning the meta-language of bison / yacc, I should endeavor to also learn these new memory related concepts and try to implement them. Ideally, I try to figure out how the ideas of ownership and stuff contrasts with [Q#](https://docs.microsoft.com/en-us/quantum/language/type-model?view=qsharp-preview) and quantum ideas of reversibility (aka unitarity) and entanglement
+
 ### ? - Parse and Setup Video Streams
 
 One obvious application of ML is to process images and streams of images (aka video) for the purposes of automating game-playing or web surfing. I would like to use something like [libsdl](https://www.libsdl.org/) to stream-capture and process in hopes of furthering the ultimate goal to build a machine that can do my job
