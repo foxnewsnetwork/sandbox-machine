@@ -32,7 +32,7 @@ I'm currently trying to use [pipenv][2] and [python-project-template][3] to get 
 
 ## A3 - Unrelated Notes on Judea Pearl's Book of Why
 
-[Judea Pearl's Book of Why][6] discusses something totally new for me: a graphical model for causality that he calls "do-calculus". I have no idea what this thing is, so I will need to do a future journal entry that goes into further details. I think it'll serve me well to go through the [causal model][7] stuff on Stanford Plato
+[Judea Pearl's Book of Why][6] (and accompanying [PDF][9]) discusses something totally new for me: a graphical model for causality that he calls "do-calculus". I have no idea what this thing is, so I will need to do a future journal entry that goes into further details. I think it'll serve me well to go through the [causal model][7] stuff on Stanford Plato
 
 An interesting side-note on Judea Pearl, according to his [wiki page][8], apparently he also popularized / invented the Bayesian Network - quite an accomplished fellow!
 
@@ -60,3 +60,4 @@ An interesting side-note on Judea Pearl, according to his [wiki page][8], appare
 [6]: <https://www.audible.com/pd/The-Book-of-Why-Audiobook/B07CYGJDJ8> "Book of Why on Audible"
 [7]: <https://plato.stanford.edu/entries/causal-models/index.html> "Causal Models from Stanford Philosophy"
 [8]: <https://en.wikipedia.org/wiki/Judea_Pearl> "Judea Pearl on Wikipedia"
+[9]: <http://download.audible.com/product_related_docs/BK_BRLL_010665.pdf> "Accompanying PDF to the Book of Why on Audible"
