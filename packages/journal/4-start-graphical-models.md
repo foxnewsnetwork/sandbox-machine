@@ -11,6 +11,91 @@ The purpose of this journal entry is to attempt to understand what these things 
 
 See [here](../intgraph)
 
+## Definitions by Example
+
+I'd like to have examples of the following:
+
+- [Factor graph][10]
+- Markov Random Field
+- Bayesian Network
+- Belief propagation
+- Potential function
+- Evidence
+- Query
+- Inference
+- [Joint probability][12]
+
+Say I have the usual graphical model (which is known as a [Bayesian network][11]):
+
+```dot
+digraph {
+  fire -> smoke
+  smoke -> alarm
+  alarm -> panic
+  fire -> hot
+  weather -> hot
+  hot -> sensor
+  sensor -> panic
+}
+```
+
+A "query" might be something like what is the probability of fire given the observed "evidence" of panic?
+
+```math
+P(fire | panic) 
+```
+
+Answering such a question is called probabilistic "inference" 
+
+So... how do I calculate the query using my network? Apparently, the trick is to use probability tables and applications of Bayes's Rule
+
+For example, our "prior beliefs" about fire might be following:
+
+| fire = t | fire = f |
+|---------|---------|
+| 0.2     |  0.8    |
+
+Panic:
+|            |            | panic = t | panic = f |
+|------------|------------|-----------|-----------|
+| alarm = t  | sensor = t |     0.9   |      0.1  |
+| alarm = t  | sensor = f |     0.8   |      0.2  |
+| alarm = f  | sensor = t |     0.7   |      0.3  |
+| alarm = f  | sensor = f |     0.1   |      0.9  |
+
+Notice that because $panic\isin{t, f}$, as in we are either panicking or not panicking, every row always sums to 1 (otherwise, we would have an inconsistent probability table). 
+
+An important point is to note that, in the beginning, my panic table *is still* my priors despite it having dependencies. Theoretically, I could get this information through performing empirical tests of how much I panic / stay calm when my alarms and sensors are on / off.
+
+In any case, we would have such a similar table for node (aka vertex) in our network.
+
+Okay... but how do exactly perform this "inference" for our query:
+
+```math
+P(fire=true | panic=true)
+```
+
+There are many different methods; the most elementary one is the so-called "variable elimination". It works thusly:
+
+- Let:
+  - F = fire
+  - W = weather
+  - S = smoke
+  - H = hot
+  - Se = sensor
+  - A = alarm
+  - P = panic
+- Let: lowercase be shorthand for `*=t`
+We start from the definition of condition probability
+
+```math
+P(f|p) = P(f,p) / P(p)
+```
+
+>protip: apparently, in the discrete world, the comma `","` denoting joint probability can be treated as something of a set union (aka logical junction)
+
+TODO: next, use the average rule to sum over the "joint probability distribution" to calculate the exact value
+
 # Appendix
 
 ## A1 - Feynman on the Process of Learning
@@ -61,3 +146,6 @@ An interesting side-note on Judea Pearl, according to his [wiki page][8], appare
 [7]: <https://plato.stanford.edu/entries/causal-models/index.html> "Causal Models from Stanford Philosophy"
 [8]: <https://en.wikipedia.org/wiki/Judea_Pearl> "Judea Pearl on Wikipedia"
 [9]: <http://download.audible.com/product_related_docs/BK_BRLL_010665.pdf> "Accompanying PDF to the Book of Why on Audible"
+[10]: <http://deepdive.stanford.edu/inference> "Stanford Deepdive on Factor Graphs"
+[11]: <https://en.wikipedia.org/wiki/Bayesian_network> "Bayesian Network on Wikipedia"
+[12]: <https://en.wikipedia.org/wiki/Joint_probability_distribution> "Joint probability"
